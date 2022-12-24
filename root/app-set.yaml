@@ -1,23 +1,23 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
- metadata:
+metadata:
   name: appset-demo
 spec:
  generators:
- - git:
-    repoURL: https://github.com/CloudNat01/argodcd-helm.git
-    revision: HEAD
-    directories:
-    - path: root/*
-template:
- metadata:
-  name: ‘{{path[0]}}’
- spec:
-  project: default
-  source:
-   repoURL: https://github.com/CloudNat01/argodcd-helm.git
-   targetRevision: HEAD
-   path: {{path}}
- destination:
-  server: https://kubernetes.default.svc
-  namespace: default
+   - git:
+        repoURL: https://github.com/CloudNat01/argodcd-helm.git
+        revision: HEAD
+        directories:
+        - path: root/*
+ template:
+   metadata:
+    name: ‘{{path[0]}}’
+   spec:
+    project: default
+    source:
+      repoURL: https://github.com/CloudNat01/argodcd-helm.git
+      targetRevision: HEAD
+      path: "{{ path }}"
+    destination:
+     server: https://kubernetes.default.svc
+     namespace: default
