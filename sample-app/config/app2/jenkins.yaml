@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://charts.jenkins.io
     targetRevision:  2.375.1
-    chart: jenkins/jenkins
+    chart: jenkins
   destination:
     server: https://kubernetes.default.svc
     namespace: jenkins
