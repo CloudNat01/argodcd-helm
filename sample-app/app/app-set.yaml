@@ -10,7 +10,7 @@ spec:
         revision: HEAD
         directories:
           # here it will read the paths under configs and the subpaths under the config paths
-          - path: sample-app/config/*/*
+          - path: sample-app/config/app1/*
   template:
     metadata:
       namespace: argocd
@@ -19,10 +19,10 @@ spec:
     spec:
       project: default
       source:
-        helm:
-          # specify different values file based on directories variables
-          valueFiles:
-            - "config/values.yaml"
+        # helm:
+        #   # specify different values file based on directories variables
+        #   valueFiles:
+        #     - "config/values.yaml"
         path: sample-app
         repoURL: https://github.com/CloudNat01/argodcd-helm.git
         targetRevision: HEAD
