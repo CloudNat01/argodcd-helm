@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://charts.jenkins.io
-    targetRevision:  2.375.1
+    targetRevision:  4.2.17
     chart: jenkins
   destination:
     server: https://kubernetes.default.svc
