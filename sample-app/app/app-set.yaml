@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: test-deploy
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/CloudNat01/argodcd-helm.git
+        revision: HEAD
+        directories:
+          # here it will read the paths under configs and the subpaths under the config paths
+          - path: sample-app/config/*
+  template:
+    metadata:
+      namespace: argocd
+      # you can use the path strings with / delimiter as variables
+      name: "{{path[0]}}-{{path.basename}}"
+    spec:
+      project: default
+      source:
+        helm:
+          # specify different values file based on directories variables
+          valueFiles:
+            - "config/values.yaml"
+        path: sample-app
+        repoURL: https://github.com/CloudNat01/argodcd-helm.git
+        targetRevision: HEAD
+      syncPolicy:
+        automated:
+          prune: true
+      destination:
+        # specify different destinations
+        namespace: "{{path.basename}}"
+        server: https://kubernetes.default.svc
